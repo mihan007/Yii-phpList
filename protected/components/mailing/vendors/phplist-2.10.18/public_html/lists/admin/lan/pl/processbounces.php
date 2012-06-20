@@ -1,0 +1,56 @@
+<?php
+$lan = array(
+  "This page can only be called from the commandline" => "Ta strona mo�e by� wywo�ana tylko z lini polece�",
+  "Bounce processing error" => "B��d przetwarzania zwrot�w",
+  "Bounce Processing info" => "Przetwarzanie zwrot�w - informacja",
+  "error" => "b��d",
+  "info" => "informacja",
+  "system message bounced, user marked unconfirmed" => "system wiadomo�ci zwrotnych, u�ytkownik oznaczony jako niepotwierdzony",
+  "Bounced system message" => "System wiadomo�ci zwrotnych",
+  "User marked unconfirmed" => "U�ytkownik oznaczony jako niepotwierdzony",
+  "View Bounce" => "Poka� zwrot",
+  "Cannot create POP3 connection to" => "Nie mo�na utworzy� po��czenie POP3 do",
+  "Cannot open mailbox file" => "Nie mo�na otworzy� pliku skrzynki pocztowej",
+  "bounces to fetch from the mailbox" => "zwtor�w do pobrania ze skrzynki pocztowej",
+  "Please do not interrupt this process" => "Prosz� nie przerywa� tego procesu",
+  "bounces to process" => "zwrot�w do przetworzenia",
+  "Processing first" => "Przetwarzanie pierwszego",
+  "bounces" => "zwroty",
+  "Running in test mode, not deleting messages from mailbox" => "Uruchomiono w trybie tstowym. Wiadomo�ci nie b�d� usuwane ze skrzynki pocztowej",
+  "Processed messages will be deleted from mailbox" => "Przetworzone wiadomo�ci zostan� usuni�te ze skrzynki pocztowej",
+  "Deleting message" => "Usuwanie wiadomo�ci",
+  "Closing mailbox, and purging messages" => "Zamykanie skrzynki pocztowej i opr�nianie wiadomo�ci",
+  "IMAP is not included in your PHP installation, cannot continue" => "IMAP nie jest w��czony w Twoj� instalacj� PHP, nie mo�na kontynuowa�",
+  "Check out" => "Sprawd�",// or 'go look', 'consult', etc.
+  "Bounce mechanism not properly configured" => "Mechanizm zwr�t�w nie jest prawid�owo skonfigurowany",
+  "bounce_protocol not supported" => "Nieobs�ugiwany bounce_protocol",
+  "Identifying consecutive bounces" => "Identyfikacja kolejnych zwrot�w",
+  "Nothing to do" => "Nie ma nic do zrobienia",
+  "Process Killed by other process" => "Proces zosta� zatrzymany przez inny proces",
+// 3 lines below = one sentence
+  "User" => "U�ytkownik",
+  "has consecutive bounces" => "ma kolejne zwroty",
+  "over threshold, user marked unconfirmed" => "powy�ej progu, oznaczono u�ytkownika jako niepotwierdzony",
+  "Auto Unsubscribed" => "Automatycznie anulowano subsktypcj�",
+// 2 lines below = one sentence
+  "User auto unsubscribed for" => "U�ytkownikowi automatycznie anulowano subsktypcj� dla",
+  "consecutive bounces" => "nast�pnych zwr�t�w",
+// 3 lines below = one sentence
+  "Identifying consecutive bounces" => "Identyfikacja kolejnych zwrot�w",
+  "of" => "z",
+  "users processed" => "u�ytkownik�w przetworzonych",
+  'processing first' => 'przetwarzanie pierwszego',
+  'Report:' => 'Raport:',
+  'Below are users who have been marked unconfirmed. The number in [] is their userid, the number in () is the number of consecutive bounces' => 'Poni�ej znajduj� si� u�ytkownicy, kt�rzy zostali oznaczeni jako niepotwierdzeni. Liczba w [] to ich identyfikator, liczba w () to ilo�� kolejnych zwrot�w',
+  
+  ## new in 2.9.5
+  'Processing bounces based on active bounce rules' => 'Przetwarzanie zwrot�w na podstawie aktywnych regu� zwrot�w',
+  'Auto Blacklisted' => 'Automatycznie dodano do czarnej listy',
+  'User auto blacklisted for' => 'U�ytkownik zosta� automatycznie dodany do czarnej listy dla',
+  'bounce rule' => 'regu�a zwrot�w',
+  'system message bounced, but unknown user' => 'system wiadomo�ci zwrotnych, nieznany u�ytkownik',
+  'bounces processed by advanced processing' => 'zwroty przetworzono za pomoc� zaawansowanego przetwarzania',
+  'bounces were not matched by advanced processing rules' => 'zwroty nie zosta�y dopasowane do regu� zaawansowanego przetwarzania',
+  'Report of advanced bounce processing:' => 'Raport z zaawansowanego przetwarzania wiadomo�ci zwrotnych:',
+);
+?>
