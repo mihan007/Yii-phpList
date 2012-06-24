@@ -7,18 +7,18 @@ return array(
 	'name'=>'My Console Application',
 	// application components
 	'components'=>array(
-		'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-		),
-		// uncomment the following to use a MySQL database
-		/*
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
-			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
-			'charset' => 'utf8',
-		),
-		*/
+        'db'=>array(
+            'connectionString' => 'mysql:host=localhost;dbname=yiiPhpList',
+            'emulatePrepare' => true,
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+        ),
 	),
+    'commandMap' => array(
+        'mailing' => array(
+            'class' => 'application.components.mailing.MailingCommand',
+            'phpListPath' => 'http://yii-phplist/lists'
+        )
+    )
 );

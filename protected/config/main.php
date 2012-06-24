@@ -74,6 +74,9 @@ return array(
 				*/
 			),
 		),
+        'mailing'=>array(
+            'class'=>'application.components.mailing.MailingComponent'
+        )
 	),
 
 	// application-level parameters that can be accessed

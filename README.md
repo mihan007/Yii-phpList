@@ -32,3 +32,21 @@ Integration phpList and Yii
 данных в конфигурации yii отличается - то его необходимо также настроить в указанном ранее файле.
 
 4. Для создания таблиц phpList надо запустить стандартный установщик http://site.name/lists/admin/
+
+5. Для просмотра полного руководства по настройке phpList пользуйтесь http://docs.phplist.com/PhpListConfiguration.html
+
+6. Настройте консольное приложение для выполнения команд компонента. Для этого в конфигурационном файле console.php добавьте
+```php
+'commandMap' => array(
+    'mailing' => array(
+        'class' => 'application.components.mailing.MailingCommand',
+        'phpListPath' => 'http://yii-phplist/lists', //url к текущей установке phpList
+        'cronUserName' => 'cron', //имя пользователя, используемое для рассылки писем (будет создан автоматически при установке)
+        'cronUserPassword' => 'sjdfh12e12nr23r5@#$!@fd', //пароль пользователя для отправки писем
+    )
+)
+```
+
+7. Запустите консольный инсталлятор компонента *yiic mailing install phplist_*, где *phplist_* - префикс таблиц в базе данных
+для phpList (в файле config.php у phpList этот параметр называется *table_prefix*). Это добавит необходимые данные в таблицы
+phpList.
