@@ -43,8 +43,7 @@ Integration phpList and Yii
         'phpListPath' => 'http://yii-phplist/lists', //url к текущей установке phpList
         'cronUserName' => 'cron', //имя пользователя, используемое для рассылки писем (будет создан автоматически при установке)
         'cronUserPassword' => 'sjdfh12e12nr23r5@#$!@fd', //пароль пользователя для отправки писем
-    )
-)
+))
 ```
 
 7. Запустите консольный инсталлятор компонента *yiic mailing install phplist_*, где *phplist_* - префикс таблиц в базе данных
