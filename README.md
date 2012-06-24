@@ -49,3 +49,12 @@ Integration phpList and Yii
 7. Запустите консольный инсталлятор компонента *yiic mailing install phplist_*, где *phplist_* - префикс таблиц в базе данных
 для phpList (в файле config.php у phpList этот параметр называется *table_prefix*). Это добавит необходимые данные в таблицы
 phpList.
+
+8. Настроить компонент веб приложения в файле config.php:
+```php
+'mailing'=>array(
+    'class'=>'application.components.mailing.MailingComponent',
+    'phpListPrefix' => 'phplist_', //префикс таблиц phplist
+    'validateEmails' => true //валидировать ли email при выполнении операций
+)
+```

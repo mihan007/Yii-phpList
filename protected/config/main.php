@@ -75,7 +75,9 @@ return array(
 			),
 		),
         'mailing'=>array(
-            'class'=>'application.components.mailing.MailingComponent'
+            'class'=>'application.components.mailing.MailingComponent',
+            'phpListPrefix' => 'phplist_', //префикс таблиц phplist
+            'validateEmails' => true //валидировать ли email при выполнении операций
         )
 	),
 
