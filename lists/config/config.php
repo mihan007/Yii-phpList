@@ -1,4 +1,78 @@
 <?php
+/*
+ changes by mihan007.
+ Добавлена возможность брать конфигурационные параметры из настроек yii
+ */
+define('YII_INTEGRATION', true);
+
+/**
+ * Путь к файлу с настройками для Yii.
+ * Используется для поиска настроек базы данных yii
+ */
+$yiiConfigFile = realpath(dirname(__FILE__).'/../../protected/config/main.php');
+
+/**
+ * имя компонента, используемого для доступа к базе данных, где будет лежать база phpList
+ */
+$yiiDbComponent = 'db';
+
+if (YII_INTEGRATION)
+{
+    if ($yiiConfigFile===false)
+    {
+        echo 'Yii configuration files not found at '.$yiiConfigFile.'. Please check yiiConfig variable at '.__FILE__;
+        throw new Exception();
+    }
+    $yiiConfig = require_once($yiiConfigFile);
+
+    $yiiDbConfig = isset($yiiConfig['components'][$yiiDbComponent]) ? $yiiConfig['components'][$yiiDbComponent] : false;
+
+    if (!$yiiDbConfig)
+    {
+        echo 'Incorrect Yii database component. Please check yiiDbComponent at '.__FILE__;
+        throw new Exception();
+    }
+
+    $yiiDbConnectionString = (isset($yiiDbConfig['connectionString'])) ? $yiiDbConfig['connectionString'] : false;
+    if ($yiiDbConnectionString)
+    {
+        if (substr($yiiDbConnectionString,0,5)!=='mysql')
+        {
+            echo 'Incorrect database driver at Yii configuration. You should use mysql for phpList.';
+            throw new Exception;
+        }
+    }
+    else
+    {
+        echo 'Incorrect database connection string at Yii configuration.';
+        throw new Exception;
+    }
+
+    $yiiStartHost = strpos($yiiDbConnectionString, 'host=')+5;
+    $yiiEndHost = strpos($yiiDbConnectionString, ';', $yiiStartHost);
+    $yiiDbHost = substr($yiiDbConnectionString, $yiiStartHost, $yiiEndHost - $yiiStartHost);
+    if (strlen($yiiDbHost)==0)
+    {
+        echo 'Incorrect database host. You should check yii configuraton file.';
+        throw new Exception;
+    }
+
+    $yiiStartDbName = strpos($yiiDbConnectionString, 'dbname=');
+    $yiiEndDbName = strlen($yiiDbConnectionString);
+    $yiiDbName = substr($yiiDbConnectionString, $yiiStartDbName + 7, $yiiEndDbName - $yiiStartDbName);
+    if (strlen($yiiDbName)==0)
+    {
+        echo 'Incorrect database name. You should check yii configuraton file.';
+        throw new Exception;
+    }
+
+    $yiiDbUser = $yiiDbConfig['username'];
+    $yiiDbPassword = $yiiDbConfig['password'];
+}
+
+?>
+
+<?php
 
 /*
 
@@ -18,17 +92,34 @@ General settings for language and database
 # choose your language by using the dropdown in the pages.
 $language_module = "english.inc";
 
-# what is your Mysql database server
-$database_host = "localhost";
+if (YII_INTEGRATION)
+{
+    # what is your Mysql database server
+    $database_host = $yiiDbHost;
 
-# what is the name of the database we are using
-$database_name = "phplistdb";
+    # what is the name of the database we are using
+    $database_name = $yiiDbName;
 
-# who do we log in as?
-$database_user = "phplist";
+    # who do we log in as?
+    $database_user = $yiiDbUser;
 
-# and what password do we use
-$database_password = 'phplist';
+    # and what password do we use
+    $database_password = $yiiDbPassword;
+}
+else
+{
+    # what is your Mysql database server
+    $database_host = "localhost";
+
+    # what is the name of the database we are using
+    $database_name = "phplistdb";
+
+    # who do we log in as?
+    $database_user = "phplist";
+
+    # and what password do we use
+    $database_password = 'phplist';
+}
 
 # if you use multiple installations of PHPlist you can set this to
 # something to identify this one. it will be prepended to email report

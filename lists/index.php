@@ -1,7 +1,7 @@
 <?php
 
 ob_start();
-$er = error_reporting(0); 
+$er = error_reporting(-1);
 require_once dirname(__FILE__) .'/admin/commonlib/lib/unregister_globals.php';
 require_once dirname(__FILE__) .'/admin/commonlib/lib/magic_quotes.php';
 require_once dirname(__FILE__).'/admin/init.php';
