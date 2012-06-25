@@ -58,3 +58,42 @@ phpList.
     'validateEmails' => true //валидировать ли email при выполнении операций
 )
 ```
+
+9. Для интеграции административной части phpList и yii в плане добавления подписчиков необходимо в любом контроллере
+прописать пути к action компонента, отвечающим за вывод контрола "Список пользователей для добавления" и "Добавление
+подписчика":
+```php
+public function actions()
+{
+    return array(
+        'subscribeList'=>array( //вывод контрола "Список пользователей для добавления"
+            'class'=>'application.components.mailing.GetUsersAction',
+
+            'yiiUserModel => 'Users', //имя класса модели с пользователями
+            'yiiUserIdColumn => 'id', //имя столбца, по которому связываем пользователей
+            'yiiUserEmailColumn' => 'email', //поле email
+            'yiiUserSortColumn' => 'email', //поле, по которому сортируется список
+            'yiiUserNameColumn' => 'username'; //поле используемое для визуального отображения имени пользователя
+
+            'phpListPrefix' => 'phplist_'; //префикс таблиц phpList
+
+            'formMethod' => 'post'; //метод сабмита формы
+            'formAction'=>Yii::app()->createUrl('/site/addSubscriber') //адрес, куда должна сабмититься форма (см. далее)
+            'paramName'=>'subscriberIds', //имя параметра для сабмита
+        ),
+        'addSubscriber'=>array( //"Добавление подписчика"
+            'class'=>'application.components.mailing.AddSubscriberAction',
+
+            'yiiUserModel' => 'Users', //имя класса модели с пользователями
+            'yiiUsedIdColumn' => 'id', //имя столбца, по которому связываем пользователей
+            'yiiUserEmailColumn' => 'email', //поле email
+
+            'method' => 'post', //метод сабмита формы
+            'paramName'=>'subscriberIds', //имя параметра для сабмита
+
+            'mailingComponent' => 'mailing', //имя компонента, используемого для добавления
+        )
+    );
+}
+```
+Действия сделаны автономными от компонента mailing и универсальными и именно поэтому принимают на вход много параметров.

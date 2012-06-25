@@ -12,6 +12,7 @@ class GetUsersAction extends CAction
     public $yiiUserEmailColumn = 'email';
     public $yiiUserSortColumn = 'email';
     public $yiiUserNameColumn = 'username';
+    public $paramName = 'subscriberIds'; //имя параметра для сабмита
 
     public $phpListPrefix = 'phplist_';
 
@@ -31,7 +32,7 @@ class GetUsersAction extends CAction
 
         echo CHtml::form($this->formAction, $this->formMethod);
         echo 'Add a subscriber:';
-        echo CHtml::dropDownList('subscriberIds', '', CHtml::listData($unsubscribedUsers, $this->yiiUserIdColumn, $this->yiiUserNameColumn));
+        echo CHtml::dropDownList($this->paramName, '', CHtml::listData($unsubscribedUsers, $this->yiiUserIdColumn, $this->yiiUserNameColumn));
         echo CHtml::submitButton('add', array('id'=>'yii-add-subscriber-button'));
         echo CHtml::button('reload list', array('id'=>'yii-reload-subscriber-button'));
         echo CHtml::endForm();
