@@ -92,6 +92,7 @@ public function actions()
             'paramName'=>'subscriberIds', //имя параметра для сабмита
 
             'mailingComponent' => 'mailing', //имя компонента, используемого для добавления
+            'autoConfirm' => true //считать ли адреса подписчиков автоматически подтверждёнными
         )
     );
 }

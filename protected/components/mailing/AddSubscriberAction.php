@@ -15,6 +15,8 @@ class AddSubscriberAction extends CAction
     public $paramName = 'ids';
     public $mailingComponent = 'mailing';
 
+    public $autoConfirm = true;
+
     public function run()
     {
         $ids = false;
@@ -35,7 +37,7 @@ class AddSubscriberAction extends CAction
                 $user = $model::model()->findByAttributes(array($this->yiiUsedIdColumn=>$id));
                 if ($user)
                 {
-                    $result = Yii::app()->{$this->mailingComponent}->addSubscriber($id, $user->{$this->yiiUserEmailColumn});
+                    $result = Yii::app()->{$this->mailingComponent}->addSubscriber($id, $user->{$this->yiiUserEmailColumn}, $this->autoConfirm);
                     if ($result!==false)
                         $counter++;
                 }
