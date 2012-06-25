@@ -18,6 +18,15 @@ class SiteController extends Controller
 			'page'=>array(
 				'class'=>'CViewAction',
 			),
+            'subscribeList'=>array(
+                'class'=>'application.components.mailing.GetUsersAction',
+                'yiiUserNameColumn'=>'NameAsSubscriber',
+                'formAction'=>Yii::app()->createUrl('/site/addSubscriber')
+            ),
+            'addSubscriber'=>array(
+                'class'=>'application.components.mailing.AddSubscriberAction',
+                'paramName'=>'subscriberIds'
+            )
 		);
 	}
 

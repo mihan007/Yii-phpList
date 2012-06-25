@@ -141,9 +141,9 @@ if (ereg("dev", VERSION))
 else
 	$v = VERSION;
 if (REGISTER) {
-	$PoweredByImage = '<p align=left><a href="http://www.phplist.com"><img src="http://powered.phplist.com/images/' . $v . '/power-phplist.png" width=70 height=30 title="powered by phpList version ' . $v . ', &copy; phpList ltd" alt="powered by phpList' . $v . ', &copy phpList ltd" border="0"></a></p>';
+	$PoweredByImage = '';//'<p align=left><a href="http://www.phplist.com"><img src="http://powered.phplist.com/images/' . $v . '/power-phplist.png" width=70 height=30 title="powered by phpList version ' . $v . ', &copy; phpList ltd" alt="powered by phpList' . $v . ', &copy phpList ltd" border="0"></a></p>';
 } else {
-	$PoweredByImage = '<p align=left><a href="http://www.phplist.com"><img src="images/power-phplist.png" width=70 height=30 title="powered by phpList version ' . $v . ', &copy; phpList ltd" alt="powered by phpList' . $v . ', &copy phpList ltd" border="0"></a></p>';
+	$PoweredByImage = '';//'<p align=left><a href="http://www.phplist.com"><img src="images/power-phplist.png" width=70 height=30 title="powered by phpList version ' . $v . ', &copy; phpList ltd" alt="powered by phpList' . $v . ', &copy phpList ltd" border="0"></a></p>';
 }
 
 $PoweredByText = '<div style="clear: both; font-family: arial, verdana, sans-serif; font-size: 8px; font-variant: small-caps; font-weight: normal; padding: 2px; padding-left:10px;padding-top:20px;">powered by <a href="http://www.phplist.com" target="_blank">phplist</a> v ' . $v . ', &copy; <a href="http://www.phplist.com/poweredby" target="_blank">phpList ltd</a></div>';
@@ -435,7 +435,7 @@ function newMenu() {
 			break;
 	}
 	if (TEST && REGISTER)
-		$pixel = '<img src="http://powered.phplist.com/images/pixel.gif" width=1 height=1>';
+		$pixel = '';//'<img src="http://powered.phplist.com/images/pixel.gif" width=1 height=1>';
 	else
 		$pixel = "";
 	global $tables;

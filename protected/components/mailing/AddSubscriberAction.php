@@ -22,14 +22,25 @@ class AddSubscriberAction extends CAction
             $ids = isset($_POST[$this->paramName]) ? $_POST[$this->paramName] : false;
         else if ($this->method == 'get')
             $ids = isset($_GET[$this->paramName]) ? $_GET[$this->paramName] : false;
+        if (is_numeric($ids))
+            $ids = array($ids);
+        if (!is_array($ids))
+            return;
         if ($ids)
         {
+            $counter = 0;
             foreach ($ids as $id)
             {
-                $user = {$this->yiiUserModel}::model()->findByAttributes(array($this->yiiUsedIdColumn=>$id));
+                $model = new $this->yiiUserModel;
+                $user = $model::model()->findByAttributes(array($this->yiiUsedIdColumn=>$id));
                 if ($user)
-                    Yii::app()->{$this->mailingComponent}->addSubscriber($id, $user->{$this->yiiUserEmailColumn});
+                {
+                    $result = Yii::app()->{$this->mailingComponent}->addSubscriber($id, $user->{$this->yiiUserEmailColumn});
+                    if ($result!==false)
+                        $counter++;
+                }
             }
+            echo 'Added '.$counter.' subscribers';
         }
     }
 }

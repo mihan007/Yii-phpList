@@ -11,7 +11,7 @@ class MailingComponent extends CApplicationComponent
      */
     public $validateEmails = true;
 
-    public function addSubscriber($id, $email,$password='')
+    public function addSubscriber($id, $email, $confirmed=0, $password='')
     {
         $db = Yii::app()->db;
         $exists = $db->createCommand()->select('id')->from($this->phpListPrefix.'user_user')->where('email=:email',array(':email'=>$email))->queryRow();
@@ -19,8 +19,12 @@ class MailingComponent extends CApplicationComponent
         {
             $db->createCommand()->update(
                 $this->phpListPrefix.'user_user',
-                array('yiiuserid'=>$id),
-                array('id'=>$exists['id'])
+                array(
+                    'foreignkey'=>$id,
+                    'yiiuserid'=>$id
+                ),
+                'id=:id',
+                array(':id'=>$exists['id'])
             );
             return $exists['id'];
         }
@@ -29,13 +33,15 @@ class MailingComponent extends CApplicationComponent
             $this->phpListPrefix.'user_user',
             array(
                 'email'=>$email,
+                'confirmed'=>$confirmed,
                 'entered'=>new CDbExpression('NOW()'),
                 'modified'=>new CDbExpression('NOW()'),
                 'password'=>$password,
                 'passwordchanged'=>new CDbExpression('NOW()'),
                 'disabled'=>0,
-                'uniquid'=>md5(uniqid(mt_rand())),
+                'uniqid'=>md5(uniqid(mt_rand())),
                 'htmlemail'=>1,
+                'foreignkey'=>$id,
                 'yiiuserid'=>$id
             )
         );

@@ -9,6 +9,8 @@ class GetUsersAction extends CAction
 {
     public $yiiUserModel = 'Users';
     public $yiiUserIdColumn = 'id';
+    public $yiiUserEmailColumn = 'email';
+    public $yiiUserSortColumn = 'email';
     public $yiiUserNameColumn = 'username';
 
     public $phpListPrefix = 'phplist_';
@@ -21,11 +23,17 @@ class GetUsersAction extends CAction
         $db = Yii::app()->db;
         $subscribedIds = $db->createCommand()->select('yiiuserid')->from($this->phpListPrefix.'user_user')->queryColumn();
         $criteria = new CDbCriteria();
-        $criteria->addNotInCondition($this->yiiUsedIdColumn, $subscribedIds);
-        $unsubscribedUsers = {$this->yiiUserModel}::model()->find($criteria);
+        $criteria->addNotInCondition($this->yiiUserIdColumn, $subscribedIds);
+        $criteria->addCondition(new CDbExpression('LENGTH('.$this->yiiUserEmailColumn.')>0'));
+        $criteria->order = $this->yiiUserSortColumn;
+        $model = new $this->yiiUserModel;
+        $unsubscribedUsers = $model::model()->findAll($criteria);
 
         echo CHtml::form($this->formAction, $this->formMethod);
-        echo CHtml::dropDownList('subscribeIds', '', CHtml::listData($unsubscribedUsers, $this->yiiUserIdColumn, $this->yiiUserNameColumn));
+        echo 'Add a subscriber:';
+        echo CHtml::dropDownList('subscriberIds', '', CHtml::listData($unsubscribedUsers, $this->yiiUserIdColumn, $this->yiiUserNameColumn));
+        echo CHtml::submitButton('add', array('id'=>'yii-add-subscriber-button'));
+        echo CHtml::button('reload list', array('id'=>'yii-reload-subscriber-button'));
         echo CHtml::endForm();
     }
 }

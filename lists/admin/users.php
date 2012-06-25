@@ -1,4 +1,5 @@
 <script language="Javascript" src="js/jslib.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <hr>
 
 <?php
@@ -11,6 +12,30 @@ require_once dirname(__FILE__).'/accesscheck.php';
 $columns = array("messages","lists","bounces","rss","blacklist");
 
 include dirname(__FILE__).'/commonlib/pages/users.php';
+print "
+<script type='text/javascript'>
+    $(function(){
+        var yiiForm = $('#yii-add-user'),
+            subscribeButton = $('#yii-add-subscriber-button'),
+            reloadSubscribeButton = $('#yii-reload-subscriber-button');
+        $.get('".$GLOBALS['yii']['getSubscribeFormUrl']."','',function(responseText){
+            yiiForm.html(responseText);
+        });
+        subscribeButton.live('click',function(){
+            $.post('".$GLOBALS['yii']['submitSubscribeFormUrl']."', yiiForm.find('form').serialize(), function(response){
+                $.get('".$GLOBALS['yii']['getSubscribeFormUrl']."','',function(responseText){
+                    yiiForm.html(responseText);
+                    yiiForm.append(response);
+                });
+            });
+            return false;
+        });
+        reloadSubscribeButton.live('click',function(){
+            window.location.reload();
+        });
+    })
+</script>
+";
 return;
 
 
@@ -278,6 +303,9 @@ Find a user: <input type=text name=find value="<?php echo $find != '%' ? $find :
   }
 ?></select><input type=submit value="Go">&nbsp;&nbsp;<a href="./?page=users&find=NULL">reset</a>
 </form></td></tr>
+<tr>
+    <td colspan=4><span id=yii-add-user>&nbsp;</span></td>
+</tr>
 <tr><td colspan=4>
 <?php
 #if (($require_login && isSuperUser()) || !$require_login)
@@ -325,5 +353,3 @@ if (!$some) {
   print "<p>No users apply</p>";
 }
 ?>
-
-

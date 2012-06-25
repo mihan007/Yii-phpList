@@ -25,6 +25,9 @@ if (YII_INTEGRATION)
     }
     $yiiConfig = require_once($yiiConfigFile);
 
+    $GLOBALS['yii']['getSubscribeFormUrl'] = $yiiConfig['params']['getSubscribeFormUrl'];
+    $GLOBALS['yii']['submitSubscribeFormUrl'] = $yiiConfig['params']['submitSubscribeFormUrl'];
+
     $yiiDbConfig = isset($yiiConfig['components'][$yiiDbComponent]) ? $yiiConfig['components'][$yiiDbComponent] : false;
 
     if (!$yiiDbConfig)

@@ -337,6 +337,9 @@ if ($total > MAX_USER_PP) {
   }
 ?></select><input type=submit value="Go">&nbsp;&nbsp;<a href="?page=users&find=NULL"><?php echo $GLOBALS['I18N']->get('reset')?></a>
 </form></td></tr>
+<tr>
+    <td colspan=4><span id=yii-add-user>&nbsp;</span></td>
+</tr>
 <tr><td colspan=4>
 <?php
 #if (($require_login && isSuperUser()) || !$require_login)
