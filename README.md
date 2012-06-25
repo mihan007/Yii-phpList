@@ -40,7 +40,7 @@ Integration phpList and Yii
 'commandMap' => array(
     'mailing' => array(
         'class' => 'application.components.mailing.MailingCommand',
-        'phpListPath' => 'http://yii-phplist/lists', //url к текущей установке phpList
+        'phpListPath' => 'http://yiiphplist.local/lists', //url к текущей установке phpList
         'cronUserName' => 'cron', //имя пользователя, используемое для рассылки писем (будет создан автоматически при установке)
         'cronUserPassword' => 'sjdfh12e12nr23r5@#$!@fd', //пароль пользователя для отправки писем
 ))
