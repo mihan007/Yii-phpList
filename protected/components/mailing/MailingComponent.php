@@ -14,7 +14,7 @@ class MailingComponent extends CApplicationComponent
     public function addSubscriber($id, $email,$password='')
     {
         $db = Yii::app()->db;
-        $exists = $db->createCommand()->select('id')->where('email=:email',array(':email'=>$email))->queryRow();
+        $exists = $db->createCommand()->select('id')->from($this->phpListPrefix.'user_user')->where('email=:email',array(':email'=>$email))->queryRow();
         if ($exists)
         {
             $db->createCommand()->update(
@@ -25,7 +25,7 @@ class MailingComponent extends CApplicationComponent
             return $exists['id'];
         }
 
-        $db->createCommand()->insert(
+        $count = $db->createCommand()->insert(
             $this->phpListPrefix.'user_user',
             array(
                 'email'=>$email,
@@ -35,9 +35,15 @@ class MailingComponent extends CApplicationComponent
                 'passwordchanged'=>new CDbExpression('NOW()'),
                 'disabled'=>0,
                 'uniquid'=>md5(uniqid(mt_rand())),
-                'htmlemail'=>1
+                'htmlemail'=>1,
+                'yiiuserid'=>$id
             )
         );
+        if ($count>0)
+            $exists = $db->createCommand()->select('id')->from($this->phpListPrefix.'user_user')->where('yiiuserid=:id',array(':id'=>$id))->queryRow();
+        else
+            return false;
+        return $exists['id'];
     }
 
     public function deleteSubscriber($idOrEmail)
