@@ -69,8 +69,8 @@ public function actions()
         'subscribeList'=>array( //вывод контрола "Список пользователей для добавления"
             'class'=>'application.components.mailing.GetUsersAction',
 
-            'yiiUserModel => 'Users', //имя класса модели с пользователями
-            'yiiUserIdColumn => 'id', //имя столбца, по которому связываем пользователей
+            'yiiUserModel' => 'Users', //имя класса модели с пользователями
+            'yiiUserIdColumn' => 'id', //имя столбца, по которому связываем пользователей
             'yiiUserEmailColumn' => 'email', //поле email
             'yiiUserSortColumn' => 'email', //поле, по которому сортируется список
             'yiiUserNameColumn' => 'username'; //поле используемое для визуального отображения имени пользователя
